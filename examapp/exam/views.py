@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import MusicianForm
 from .models import Musician
 
 
 def musician_edit(request, id):
 
-    musician = Musician.objects.get(id=id)
+    # musician = Musician.objects.get(id=id)
+    musician = get_object_or_404(Musician, id=id)
+
     if request.method == "POST":
         form = MusicianForm(request.POST, instance=musician)
         if form.is_valid():

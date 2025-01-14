@@ -1,47 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %}
+  <title>todo 목록</title>
+{% endblock title %}
 
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
-    <title>Document</title>
-  </head>
-
-  <body>
-    <div class="container">
-      <h1>ToDo List</h1>
-      <div>
-        <a href="{% url "todo_done" %}" class="btn btn-primary">완료목록</a>
-        <a href="{% url "todo_register" %}" class="btn btn-success">todo작성</a>
-      </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">할일</th>
-            <th scope="col">작성일</th>
-            <th scope="col">중요도</th>
-            <th scope="col">완료여부</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for todo in todos %}
-            <tr>
-              <th scope="row">{{todo.id}}</th>
-              <td>
-                <a href="{% url "todo_detail" id=todo.id %}">{{todo.title}}</a>
-              </td>
-              <td>{{todo.created_at}}</td>
-              <td>{{todo.important}}</td>
-              <td>{{todo.completed}}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
-
-</html>
+{% block content %}
+  <h1>ToDo List</h1>
+  <div>
+    <a href="{% url "todo_done" %}" class="btn btn-primary">완료목록</a>
+    <a href="{% url "todo_register" %}" class="btn btn-success">todo작성</a>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">할일</th>
+        <th scope="col">작성일</th>
+        <th scope="col">중요도</th>
+        <th scope="col">완료여부</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for todo in todos %}
+        <tr>
+          <th scope="row">{{todo.id}}</th>
+          <td>
+            <a href="{% url "todo_detail" id=todo.id %}">{{todo.title}}</a>
+          </td>
+          <td>{{todo.created_at}}</td>
+          <td>{{todo.important}}</td>
+          <td>{{todo.completed}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

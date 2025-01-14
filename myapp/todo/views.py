@@ -22,6 +22,7 @@ def todo_detail(request, id):
 def todo_register(request):
     if request.method == "POST":
         # ModelForm 을 사용 안하는 경우
+        # 폼 안의 내용 개별로 가져오기
         # title = request.POST.get("title")
         # description = request.POST.get("description")
         # important = request.POST.get("important")
@@ -40,7 +41,8 @@ def todo_register(request):
             return redirect("todo_list")
     else:
         form = TodoForm()
-        return render(request, "todo/create.html",{"form":form})
+
+    return render(request, "todo/create.html", {"form": form})
 
 
 def todo_edit(request, id):
@@ -73,7 +75,7 @@ def todo_edit(request, id):
         form = TodoForm(request.POST, instance=todo)
         if form.is_valid():
             form.save()
-        return redirect("todo_detail", id=todo.id) 
+            return redirect("todo_detail", id=todo.id)
 
     else:
         form = TodoForm(instance=todo)

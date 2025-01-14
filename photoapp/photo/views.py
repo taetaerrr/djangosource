@@ -31,12 +31,11 @@ def photo_post(request):
         form = PhotoForm(request.POST)
         if form.is_valid():
             photo = form.save()
-
-        return redirect("photo_detail", id=photo.id)
+            return redirect("photo_detail", id=photo.id)
     else:
         form = PhotoForm()
 
-    return render(request, "photo/create.html",{"form":form})
+    return render(request, "photo/create.html", {"form": form})
 
 
 def photo_detail(request, id):
@@ -66,13 +65,15 @@ def photo_edit(request, id):
         #     photo.price = price
 
         # photo.save()
+
         form = PhotoForm(request.POST, instance=photo)
         if form.is_valid():
             form.save()
             return redirect("photo_detail", id=id)
     else:
-        form = PhotoForm(request.POST)
-    return render(request, "photo/edit.html", {"form": form,"photo":photo})
+        form = PhotoForm(instance=photo)
+
+    return render(request, "photo/edit.html", {"form": form, "photo": photo})
 
 
 def photo_remove(request, id):

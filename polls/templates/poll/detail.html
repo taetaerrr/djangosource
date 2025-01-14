@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>상세보기</h4>
+  <form action="" method="post">
+    <fieldset class="form-group border p-3">
+        <legend class="w-auto px-2">
+            <h3></h3>
+        </legend>
+        <p>
+            <strong></strong>
+        </p>
+        {% comment %} question 쪽에서 choice 접근하기 {% endcomment %}
+        {% for in question.choice_set.all  %}
+            <div>
+                <input type="radio" name="choice" id="" value="{{choice.id}}">
+                <label for="">{{choice.choice_text}}</label>
+            </div>
+        {% endfor %}
+    </fieldset>
+    <button type="submit" class="btn btn-info">vote</button>
+  </form>
+
+{% endblock content %}
